@@ -5,10 +5,13 @@
 		<style>
 			div{
 				align:center; 
-				width:500px; 
-				height:700px; 
+				width:400px; 
+				height:600px; 
 				border:2px solid; 
+				border-radius:20px;
 				margin-left:35%;
+				color:white;
+				background-color:#601223;
 			}
 			div h3{
 				background-color:black;
@@ -16,15 +19,21 @@
 				padding:10px;
 				text-align:center;
 				margin:0;
+				border-radius:20px
 			}
 			div p{
 				padding-left:25px; 
 				font-size:20px;
 			}
-			div input[type="number"]{
+			div input[type="number"],#serviceQual{
 				margin-left:25px;
+				padding:10px;
 			}
-			
+			div #bill:focus,#serviceQual:focus,#people:focus{
+			background:#fff;
+				outline:none;
+				border:3px solid #2980b9;
+			}
 			button{
 			text-transform:uppercase;
 			font-weight:bold;
@@ -32,17 +41,28 @@
 			height: 50px;
 			font-size:17px;
 			color:white;
-			background: red;
+			background:green;
+			margin-left:80px;
 			}
-		</style>
+			</style>
+			<script>
+			function result(a,b,c,d){
+				var x=document.getElementById(a).value;
+				var e=document.getElementById(b);
+				var y = e.options[e.selectedIndex].value;
+				var z=document.getElementById(c).value;
+				var res = (Number(x)*Number(y))/Number(z);
+				document.getElementById(d).innerHTML=res;
+			}
+			</script>
 	</head>
 	<body>
 		<div>
 			<h3>TIP CALCULATOR</h3>
 			<br/>
-			<p><b>How much was your bill?</b></p><br/>
-			<b>  Rs.</b><input type="number" name="bill" min="5"/>
-			<br/><br/>
+			<p><b>How much was your bill?</b></p>
+			<b></b><input id="bill" type="number" name="bil" min="5" placeholder="Bill Amount"/><b>Rs.</b>
+			<br/>
 			<p><b>How was your Service?</b></p>
 			<select id="serviceQual">
 			<option disabled selected value="0">Choose an option</option>
@@ -52,10 +72,13 @@
 			<option value="0.1">30%-- Bad</option>
 			<option value="0.05">5%-- Terrible</option>
 			</select>
+			<br/>
+			<p><b>How many people are sharing the bill?</b></p>
+			<input id="people" type="number" placeholder="Number of People" min="1"/> <b>people</b><br/><br/><br/>
+			<button type="button" onclick="result('bill','serviceQual','people','ans')">Calculate!</button>
+			<br/>
+			<p style="align:center"><b>Tip amount is: <span id="ans" style="align:center"></span></b></p>
 			
-			<p><b>How many people are sharing the bill</b></p><br/>
-			<input type="text" placeholder="Number of People"> people</br></br>
-			<button type="button">Calculate!</button>
 			
 		</div>
 		
